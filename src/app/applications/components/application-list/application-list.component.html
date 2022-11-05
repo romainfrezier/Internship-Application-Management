@@ -1,0 +1,26 @@
+<mat-card>
+  <mat-card-title-group>
+    <mat-card-title>
+      Demandes de stages
+    </mat-card-title>
+    <div class="form">
+      <mat-form-field appearance="fill">
+        <input matInput type="text" [formControl]="searchCtrl">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-select [formControl]="searchTypeCtrl">
+          <mat-option *ngFor="let option of searchTypeOptions" [value]="option.value">{{ option.label }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </mat-card-title-group>
+  <mat-spinner *ngIf="loading$ | async" class="spinner"></mat-spinner>
+  <mat-nav-list *ngIf="applications$ | async as applications">
+    <a *ngFor="let application of applications" mat-list-item [routerLink]="application.id.toString()">
+      <h1 matLine class="company">{{ application.company | uppercase }}</h1>
+      <h3 matLine>Réponse : {{ application.answer }}</h3>
+      <p matLine>Contacté par {{ application.contactType | lowercase }} à {{ application.contact }}</p>
+    </a>
+  </mat-nav-list>
+</mat-card>

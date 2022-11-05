@@ -1,0 +1,34 @@
+<mat-card [formGroup]="addModelForm">
+  <mat-card-title>Ajouter un nouveau model</mat-card-title>
+  <mat-card class="form-card">
+    <mat-card-subtitle>Secteur</mat-card-subtitle>
+    <mat-radio-group formControlName="sector" class="radio-group">
+      <mat-radio-button *ngFor="let sectorType of sectorTypeOptions" [value]="sectorType">{{ sectorType }}</mat-radio-button>
+    </mat-radio-group>
+  </mat-card>
+
+  <mat-card class="form-card">
+    <mat-card-subtitle>Langage</mat-card-subtitle>
+    <mat-radio-group formControlName="language" class="radio-group">
+      <mat-radio-button value="Français">Français</mat-radio-button>
+      <mat-radio-button value="English">English</mat-radio-button>
+    </mat-radio-group>
+  </mat-card>
+
+  <mat-card class="form-card">
+    <mat-card-subtitle>Message</mat-card-subtitle>
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>Message</mat-label>
+        <textarea type="textarea" matInput formControlName="message"></textarea>
+        <mat-error>Ce champ est requis</mat-error>
+      </mat-form-field>
+    </div>
+  </mat-card>
+
+  <mat-card-actions *ngIf="addModelForm.valid">
+    <button mat-flat-button color="primary" (click)="onSubmitForm()" [disabled]="loading">SAVE</button>
+  </mat-card-actions>
+  <mat-spinner class="spinner" *ngIf="loading" color="primary" mode="indeterminate"></mat-spinner>
+
+</mat-card>

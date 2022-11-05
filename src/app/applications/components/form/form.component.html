@@ -1,0 +1,77 @@
+<mat-card [formGroup]="mainForm" class="main-form">
+
+  <mat-card-title>Ajouter une demande</mat-card-title>
+
+  <mat-card class="form-card">
+    <mat-card-subtitle>Entreprise</mat-card-subtitle>
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>Entreprise</mat-label>
+        <input type="text" matInput formControlName="company">
+        <mat-error>Ce champ est requis</mat-error>
+      </mat-form-field>
+    </div>
+  </mat-card>
+
+  <mat-card class="form-card">
+    <mat-card-subtitle>Adresse</mat-card-subtitle>
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>Adresse</mat-label>
+        <input type="text" matInput formControlName="address">
+        <mat-error>Ce champ est requis</mat-error>
+      </mat-form-field>
+    </div>
+  </mat-card>
+
+  <mat-card class="form-card">
+    <mat-card-subtitle>Type de contact</mat-card-subtitle>
+    <mat-radio-group formControlName="contactType" class="radio-group">
+      <mat-radio-button *ngFor="let contactType of contactTypeOptions" [value]="contactType">{{ contactType }}</mat-radio-button>
+    </mat-radio-group>
+  </mat-card>
+
+  <mat-card class="form-card">
+    <mat-card-subtitle>Contact</mat-card-subtitle>
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>Contact</mat-label>
+        <input type="text" matInput formControlName="contact">
+        <mat-error>Ce champ est requis</mat-error>
+      </mat-form-field>
+    </div>
+  </mat-card>
+
+  <mat-card class="form-card">
+    <mat-card-subtitle>Message</mat-card-subtitle>
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>Message</mat-label>
+        <textarea type="textarea" matInput formControlName="message"></textarea>
+        <mat-error>Ce champ est requis</mat-error>
+      </mat-form-field>
+    </div>
+  </mat-card>
+
+  <mat-card class="form-card">
+    <mat-card-subtitle>Secteur</mat-card-subtitle>
+    <mat-radio-group formControlName="sector" class="radio-group">
+      <mat-radio-button *ngFor="let sectorType of sectorTypeOptions" [value]="sectorType">{{ sectorType }}</mat-radio-button>
+    </mat-radio-group>
+  </mat-card>
+
+  <mat-card class="form-card">
+    <mat-card-subtitle>Commentaire</mat-card-subtitle>
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>Commentaire</mat-label>
+        <textarea type="text" matInput formControlName="commentary"></textarea>
+      </mat-form-field>
+    </div>
+  </mat-card>
+
+  <mat-card-actions *ngIf="mainForm.valid">
+    <button mat-flat-button color="primary" (click)="onSubmitForm()" [disabled]="loading">SAVE</button>
+  </mat-card-actions>
+  <mat-spinner class="spinner" *ngIf="loading" color="primary" mode="indeterminate"></mat-spinner>
+</mat-card>

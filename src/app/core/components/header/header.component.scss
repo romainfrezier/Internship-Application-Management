@@ -1,0 +1,19 @@
+@use '@angular/material' as mat;
+@include mat.core();
+
+ul {
+  list-style: none;
+}
+
+li {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.active {
+  color: mat.get-color-from-palette(mat.$pink-palette,300);
+}

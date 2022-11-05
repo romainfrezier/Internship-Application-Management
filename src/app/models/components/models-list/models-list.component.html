@@ -1,0 +1,14 @@
+<h1>Models de lettres de motivation</h1>
+<mat-spinner *ngIf="loading$ | async" class="spinner"></mat-spinner>
+<button mat-flat-button color="primary" (click)="onNewModel()">NOUVEAU MODEL</button>
+<div *ngIf="models$ | async as models">
+  <mat-card  *ngFor="let model of models" class="letter">
+    <mat-card-title>Message pour {{ model.sector }}</mat-card-title>
+    <mat-card-subtitle>Langage : {{ model.language }}</mat-card-subtitle>
+    <p>{{ model.message }}</p>
+    <button mat-flat-button color="warn" (click)="onDeleteModel(model.id)">SUPPRIMER</button>
+  </mat-card>
+</div>
+
+
+

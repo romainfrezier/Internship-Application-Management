@@ -1,0 +1,37 @@
+<mat-card>
+  <ng-container *ngIf="application$ | async as application">
+    <mat-card-title>
+      {{ application.company }}
+    </mat-card-title>
+    <div class="application-info">
+      <p>Contacté par {{ application.contactType }} à {{ application.contact }}</p>
+      <h1>Message</h1>
+      <p class="message">{{ application.message }}</p>
+      <h1>Adresse</h1>
+      <p>{{ application.address }}</p>
+      <h1 *ngIf="application.commentary">Commentaire</h1>
+      <p *ngIf="application.commentary" class="message">{{ application.commentary }}</p>
+      <h1>Secteur</h1>
+      <p>{{ application.sector }}</p>
+      <h1>Réponse Actuelle</h1>
+      <p>{{ application.answer }}</p>
+    </div>
+  </ng-container>
+  <div class="separator"></div>
+  <mat-card-actions>
+    <mat-spinner *ngIf="loading$ | async; else buttons" class="spinner"></mat-spinner>
+    <ng-template #buttons>
+      <h1>Nouvelle réponse ?</h1>
+      <div class="action-buttons">
+        <button mat-flat-button color="primary" (click)="onPositive()">POSITIVE</button>
+        <button mat-flat-button color="primary" (click)="onRatherPositive()">PLUTÔT POSITIVE</button>
+        <button mat-flat-button color="primary" (click)="onNegative()">NEGATIVE</button>
+        <button mat-flat-button color="primary" (click)="onNone()">AUCUNE</button>
+      </div>
+      <div class="separator"></div>
+      <button mat-flat-button color="warn" (click)="onRemove()">SUPPRIMER</button>
+      <div class="separator"></div>
+      <button mat-flat-button color="primary" (click)="onGoBack()">RETOUR</button>
+    </ng-template>
+  </mat-card-actions>
+</mat-card>
