@@ -30,8 +30,8 @@ export class ApplicationListComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.initObservables();
     this.applicationsService.getApplicationsFromServer();
+    this.initObservables();
     this.searchTypeOptions = [
       { value: ApplicationSearchType.COMPANY, label: 'Entreprise' },
       { value: ApplicationSearchType.CONTACT_TYPE, label: 'Type de contact' },

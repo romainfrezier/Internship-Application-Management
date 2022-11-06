@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import {BehaviorSubject, catchError, delay, map, mapTo, Observable, of, switchMap, take, tap} from 'rxjs';
 import { Model } from '../models/model.model';
 import {environment} from "../../../environments/environment";
+import {Application} from "../../applications/models/application.model";
 
 @Injectable()
 export class ModelsService {
@@ -28,8 +29,18 @@ export class ModelsService {
 
   getModelsFromServer() {
     this.setLoadingStatus(true);
+
+    const compareFn = (a:Model, b:Model) => {
+      if (a.language < b.language)
+        return -1;
+      if (a.language > b.language)
+        return 1;
+      return 0;
+    };
+
     this.http.get<Model[]>(`${environment.apiUrl}/models`).pipe(
       delay(1000),
+      map(models => models.sort(compareFn)),
       tap(models => {
         this.lastModelsLoad = Date.now();
         this._models$.next(models);

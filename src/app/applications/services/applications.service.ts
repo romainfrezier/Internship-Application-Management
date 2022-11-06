@@ -28,8 +28,18 @@ export class ApplicationsService {
 
   getApplicationsFromServer() {
     this.setLoadingStatus(true);
+
+    const compareFn = (a:Application, b:Application) => {
+      if (a.company < b.company)
+        return -1;
+      if (a.company > b.company)
+        return 1;
+      return 0;
+    };
+
     this.http.get<Application[]>(`${environment.apiUrl}/applications`).pipe(
       delay(1000),
+      map(applications => applications.sort(compareFn)),
       tap(applications => {
         this.lastApplicationsLoad = Date.now();
         this._applications$.next(applications);
