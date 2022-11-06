@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {BehaviorSubject, delay, map, Observable, switchMap, take, tap} from 'rxjs';
+import {BehaviorSubject, catchError, delay, map, mapTo, Observable, of, switchMap, take, tap} from 'rxjs';
 import { Application } from '../models/application.model';
 import {environment} from "../../../environments/environment";
 
@@ -27,9 +27,6 @@ export class ApplicationsService {
   }
 
   getApplicationsFromServer() {
-    if (Date.now() - this.lastApplicationsLoad <= 60000) { // pas de refresh avant 1min (arbitraire : on estime que les données sont toujours fresh avant 1min)
-      return;
-    }
     this.setLoadingStatus(true);
     this.http.get<Application[]>(`${environment.apiUrl}/applications`).pipe(
       delay(1000),
@@ -58,6 +55,22 @@ export class ApplicationsService {
     );
   }
 
+  negativeAnswerToApplication(id: number): void {
+    this.updateAnswer(id, 'Negative');
+  }
+
+  positiveAnswerToApplication(id: number): void {
+    this.updateAnswer(id, 'Positive')
+  }
+
+  noAnswerToApplication(id: number): void {
+    this.updateAnswer(id, 'Aucune')
+  }
+
+  ratherPositiveAnswerToApplication(id: number): void {
+    this.updateAnswer(id, 'Plutôt Positive')
+  }
+
   private updateAnswer(id: number, answer: string): void {
     this.applications$.pipe(
       take(1),
@@ -76,22 +89,6 @@ export class ApplicationsService {
     ).subscribe();
   }
 
-  negativeAnswerToApplication(id: number): void {
-    this.updateAnswer(id, 'Negative');
-  }
-
-  positiveAnswerToApplication(id: number): void {
-    this.updateAnswer(id, 'Positive')
-  }
-
-  noAnswerToApplication(id: number): void {
-    this.updateAnswer(id, 'Aucune')
-  }
-
-  ratherPositiveAnswerToApplication(id: number): void {
-    this.updateAnswer(id, 'Plutôt Positive')
-  }
-
   removeApplication(id: number) {
     this.setLoadingStatus(true);
     this.http.delete(`${environment.apiUrl}/applications/${id}`).pipe(
@@ -104,5 +101,15 @@ export class ApplicationsService {
         this.setLoadingStatus(false);
       })
     ).subscribe();
+  }
+
+  updateApplication(id: number, updatedApplication: Application) {
+    return this.http.patch(`${environment.apiUrl}/applications/${id}`, updatedApplication).pipe(
+      mapTo(true),
+      delay(1000),
+      catchError(() => of(false).pipe(
+        delay(1000)
+      ))
+    );
   }
 }

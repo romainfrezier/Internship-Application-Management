@@ -7,6 +7,7 @@ import {FormComponent} from "./components/form/form.component";
 const routes: Routes = [
   { path: '', component: ApplicationListComponent },
   { path: 'add', component: FormComponent},
+  { path: 'update/:id', component: FormComponent},
   { path: ':id', component: SingleApplicationComponent }
 ];
 

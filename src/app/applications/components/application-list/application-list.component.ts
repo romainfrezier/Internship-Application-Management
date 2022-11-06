@@ -4,6 +4,7 @@ import {ApplicationsService} from "../../services/applications.service";
 import {Application} from "../../models/application.model";
 import {FormBuilder, FormControl} from "@angular/forms";
 import {ApplicationSearchType} from "../../enums/application-search-type.enum";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-application-list',
@@ -24,7 +25,8 @@ export class ApplicationListComponent implements OnInit {
   }[];
 
   constructor(private applicationsService: ApplicationsService,
-              private formBuilder: FormBuilder) { }
+              private formBuilder: FormBuilder,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -63,5 +65,9 @@ export class ApplicationListComponent implements OnInit {
   private initForm() {
     this.searchCtrl = this.formBuilder.control((''));
     this.searchTypeCtrl = this.formBuilder.control(ApplicationSearchType.COMPANY);
+  }
+
+  onNewApplication() {
+    this.router.navigateByUrl("/applications/add")
   }
 }

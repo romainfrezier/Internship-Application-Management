@@ -5,6 +5,7 @@ import {SharedModule} from "../shared/shared.module";
 import {ModelsRoutingModule} from "./models-routing.module";
 import {ModelsService} from "./services/models.service";
 import { FormComponent } from './components/form/form.component';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 
@@ -13,11 +14,11 @@ import { FormComponent } from './components/form/form.component';
     ModelsListComponent,
     FormComponent
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    ModelsRoutingModule
-  ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        ModelsRoutingModule
+    ],
   providers: [
     ModelsService
   ]

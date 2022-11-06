@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {Observable, tap} from "rxjs";
+import {Observable, take, tap} from "rxjs";
 import {ModelsService} from "../../services/models.service";
 import {Model} from "../../models/model.model";
 import {Router} from "@angular/router";
@@ -14,10 +14,6 @@ export class ModelsListComponent implements OnInit {
 
   loading$!: Observable<boolean>;
   models$!: Observable<Model[]>;
-  isFormActivated: boolean = false;
-
-
-
 
   constructor(private modelsService: ModelsService,
               private router: Router) { }
@@ -42,4 +38,7 @@ export class ModelsListComponent implements OnInit {
     }
   }
 
+  onUpdateModel(id: number) {
+    this.router.navigateByUrl(`models/update/${id}`);
+  }
 }

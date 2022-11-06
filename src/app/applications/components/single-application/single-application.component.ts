@@ -82,6 +82,15 @@ export class SingleApplicationComponent implements OnInit {
     }
   }
 
+  onUpdate() {
+    this.application$.pipe(
+      take(1),
+      tap(application => {
+        this.router.navigateByUrl(`applications/update/${application.id}`)
+      })
+    ).subscribe();
+  }
+
   onGoBack() {
     this.router.navigateByUrl('/applications');
   }

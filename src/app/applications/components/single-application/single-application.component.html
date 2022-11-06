@@ -29,9 +29,16 @@
         <button mat-flat-button color="primary" (click)="onNone()">AUCUNE</button>
       </div>
       <div class="separator"></div>
-      <button mat-flat-button color="warn" (click)="onRemove()">SUPPRIMER</button>
+      <button mat-flat-button color="warn" (click)="onRemove()">
+        <mat-icon class="btn_icon" matTooltip="Supprimer la demande de stage">delete</mat-icon>
+      </button>
+      <button mat-flat-button color="primary" (click)="onUpdate()">
+        <mat-icon class="btn_icon" matTooltip="Modifier la demande de stage">edit</mat-icon>
+      </button>
       <div class="separator"></div>
-      <button mat-flat-button color="primary" (click)="onGoBack()">RETOUR</button>
+      <button mat-flat-button color="primary" (click)="onGoBack()" matTooltip="Retour" matTooltipPosition="right">
+          <mat-icon class="btn_icon" >arrow_back</mat-icon>
+        </button>
     </ng-template>
   </mat-card-actions>
 </mat-card>

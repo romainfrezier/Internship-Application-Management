@@ -14,3 +14,19 @@
 a {
   border-bottom: lightgray thin solid;
 }
+
+.form {
+  width: 100%;
+}
+
+.form > mat-form-field {
+  width: 50%;
+}
+
+button {
+  margin-bottom: 20px;
+}
+
+.btn_icon {
+  margin: auto 10px;
+}

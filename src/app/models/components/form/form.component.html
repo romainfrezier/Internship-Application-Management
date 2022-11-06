@@ -27,7 +27,15 @@
   </mat-card>
 
   <mat-card-actions *ngIf="addModelForm.valid">
-    <button mat-flat-button color="primary" (click)="onSubmitForm()" [disabled]="loading">SAVE</button>
+    <button *ngIf="!currentModelId" mat-flat-button color="primary" (click)="onSubmitForm()" [disabled]="loading" matTooltip="Enregister le nouveau model" matTooltipPosition="left">
+      <mat-icon class="btn_icon">save</mat-icon>
+    </button>
+    <button *ngIf="currentModelId" mat-flat-button color="primary" (click)="onSubmitForm()" [disabled]="loading" matTooltip="Sauvegarder le model" matTooltipPosition="left">
+      <mat-icon class="btn_icon">save</mat-icon>
+    </button>
+    <button mat-flat-button color="primary" (click)="onGoBack()" [disabled]="loading" matTooltip="Retour" matTooltipPosition="right">
+      <mat-icon class="btn_icon">arrow_back</mat-icon>
+    </button>
   </mat-card-actions>
   <mat-spinner class="spinner" *ngIf="loading" color="primary" mode="indeterminate"></mat-spinner>
 

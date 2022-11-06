@@ -27,9 +27,6 @@ export class ModelsService {
   }
 
   getModelsFromServer() {
-    if (Date.now() - this.lastModelsLoad <= 60000) { // pas de refresh avant 1min (arbitraire : on estime que les données sont toujours fresh avant 1min)
-      return;
-    }
     this.setLoadingStatus(true);
     this.http.get<Model[]>(`${environment.apiUrl}/models`).pipe(
       delay(1000),
@@ -42,11 +39,21 @@ export class ModelsService {
         .map(model => {
             if (model.id > this.maxId){
               this.maxId = model.id;
+              console.log(model.id)
             }
           }
         )
       )
     ).subscribe();
+  }
+
+  getModelById(id: number): Observable<Model> {
+    if (!this.lastModelsLoad) {
+      this.getModelsFromServer();
+    }
+    return this.models$.pipe(
+      map(models => models.filter(model => model.id === id)[0])
+    );
   }
 
   removeModel(id: number) {
@@ -65,6 +72,16 @@ export class ModelsService {
 
   saveModel(model: Model) {
     return this.http.post(`${environment.apiUrl}/models`, model).pipe(
+      mapTo(true),
+      delay(1000),
+      catchError(() => of(false).pipe(
+        delay(1000)
+      ))
+    );
+  }
+
+  updateModel(id: number, updatedModel: Model) {
+    return this.http.patch(`${environment.apiUrl}/models/${id}`, updatedModel).pipe(
       mapTo(true),
       delay(1000),
       catchError(() => of(false).pipe(
