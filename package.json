@@ -1,7 +1,6 @@
 {
   "name": "internship-application-management",
   "version": "0.0.0",
-  base
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
