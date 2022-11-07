@@ -1,6 +1,3 @@
-@use '@angular/material' as mat;
-@include mat.core();
-
 ul {
   list-style: none;
 }
@@ -15,5 +12,5 @@ li {
 }
 
 .active {
-  color: mat.get-color-from-palette(mat.$pink-palette,300);
+  color: rgb(233,30,99);
 }
