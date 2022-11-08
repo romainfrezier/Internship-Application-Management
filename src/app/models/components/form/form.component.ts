@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Model} from "../../models/model.model";
 import {Observable, switchMap, tap} from "rxjs";
@@ -31,7 +31,8 @@ export class FormComponent implements OnInit {
       SectorTypeEnum.RECRUITER,
       SectorTypeEnum.B2B,
       SectorTypeEnum.SECURTY,
-      SectorTypeEnum.VIDEO_GAMES
+      SectorTypeEnum.VIDEO_GAMES,
+      SectorTypeEnum.FINANCE
     ];
   }
 

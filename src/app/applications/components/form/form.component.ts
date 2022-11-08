@@ -71,7 +71,8 @@ export class FormComponent implements OnInit {
       SectorTypeEnum.RECRUITER,
       SectorTypeEnum.B2B,
       SectorTypeEnum.SECURTY,
-      SectorTypeEnum.VIDEO_GAMES
+      SectorTypeEnum.VIDEO_GAMES,
+      SectorTypeEnum.FINANCE
     ];
   }
 
