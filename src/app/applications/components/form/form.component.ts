@@ -23,6 +23,7 @@ export class FormComponent implements OnInit {
 
   application$!: Observable<Application>;
   currentApplicationId!: number;
+  currentApplicationCompany!: string;
 
   constructor(private formBuilder: FormBuilder,
               private formService: FormService,
@@ -107,7 +108,8 @@ export class FormComponent implements OnInit {
           sector: [application.sector, Validators.required],
           commentary: [application.commentary === undefined ? '' : application.commentary],
           answer: [application.answer, Validators.required]
-        })
+        });
+        this.currentApplicationCompany = application.company;
       })
     ).subscribe();
   }

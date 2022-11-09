@@ -1,6 +1,7 @@
 <mat-card [formGroup]="mainForm" class="main-form">
 
-  <mat-card-title>Ajouter une demande</mat-card-title>
+  <mat-card-title *ngIf="!currentApplicationId">Ajouter une demande</mat-card-title>
+  <mat-card-title *ngIf="currentApplicationId">Modifier la demande à {{ currentApplicationCompany }}</mat-card-title>
 
   <mat-card class="form-card">
     <mat-card-subtitle>Entreprise</mat-card-subtitle>
