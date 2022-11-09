@@ -105,7 +105,8 @@ export class FormComponent implements OnInit {
           contact: [application.contact, Validators.required],
           message: [application.message, Validators.required],
           sector: [application.sector, Validators.required],
-          commentary: [application.commentary === undefined ? '' : application.commentary]
+          commentary: [application.commentary === undefined ? '' : application.commentary],
+          answer: [application.answer, Validators.required]
         })
       })
     ).subscribe();

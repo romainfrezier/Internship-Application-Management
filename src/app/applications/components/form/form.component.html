@@ -70,6 +70,16 @@
     </div>
   </mat-card>
 
+  <mat-card class="form-card" *ngIf="currentApplicationId">
+    <mat-card-subtitle>Réponse</mat-card-subtitle>
+    <mat-radio-group formControlName="answer" class="radio-group">
+      <mat-radio-button value="Positive">Positive</mat-radio-button>
+      <mat-radio-button value="Negative">Negative</mat-radio-button>
+      <mat-radio-button value="Plutôt Positive">Plutôt Positive</mat-radio-button>
+      <mat-radio-button value="Aucune">Aucune</mat-radio-button>
+    </mat-radio-group>
+  </mat-card>
+
   <mat-card-actions *ngIf="mainForm.valid">
     <button *ngIf="!currentApplicationId" mat-flat-button color="primary" (click)="onSubmitForm()" [disabled]="loading" matTooltip="Enregister le nouveau model" matTooltipPosition="left">
       <mat-icon class="btn_icon">save</mat-icon>
