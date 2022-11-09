@@ -1,5 +1,6 @@
 <mat-card [formGroup]="addModelForm">
-  <mat-card-title>Ajouter un nouveau model</mat-card-title>
+  <mat-card-title *ngIf="!currentModelId">Ajouter un nouveau model</mat-card-title>
+  <mat-card-title *ngIf="currentModelId">Modifier le model</mat-card-title>
   <mat-card class="form-card">
     <mat-card-subtitle>Secteur</mat-card-subtitle>
     <mat-radio-group formControlName="sector" class="radio-group">
