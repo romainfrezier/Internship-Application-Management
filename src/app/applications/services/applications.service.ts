@@ -6,6 +6,7 @@ import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class ApplicationsService {
+  applicationsNumber: number = 0;
   constructor(private http: HttpClient) {}
 
   maxId: number = 0;
@@ -41,6 +42,7 @@ export class ApplicationsService {
       delay(1000),
       map(applications => applications.sort(compareFn)),
       tap(applications => {
+        this.applicationsNumber = applications.length;
         this.lastApplicationsLoad = Date.now();
         this._applications$.next(applications);
         this.setLoadingStatus(false);
@@ -121,5 +123,11 @@ export class ApplicationsService {
         delay(1000)
       ))
     );
+  }
+
+
+  getApplicationsNumber(): number {
+    console.log(this.applicationsNumber);
+    return this.applicationsNumber;
   }
 }

@@ -16,6 +16,7 @@ export class ApplicationListComponent implements OnInit {
 
   loading$!: Observable<boolean>;
   applications$!: Observable<Application[]>
+  nb_applications!: number;
 
   searchCtrl!: FormControl;
   searchTypeCtrl!: FormControl;
@@ -37,6 +38,7 @@ export class ApplicationListComponent implements OnInit {
       { value: ApplicationSearchType.CONTACT_TYPE, label: 'Type de contact' },
       { value: ApplicationSearchType.ANSWER, label: 'Réponse' },
     ]
+    this.applicationsService.applications$.subscribe(applications => this.nb_applications = applications.length);
   }
 
   private initObservables() {
